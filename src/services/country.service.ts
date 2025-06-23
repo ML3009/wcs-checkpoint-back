@@ -1,4 +1,4 @@
-import { MutationCreateCountryArgs, QueryFindCountryByCodeArgs } from "../generated/graphql";
+import { MutationCreateCountryArgs, QueryFindCountriesByContinentArgs, QueryFindCountryByCodeArgs } from "../generated/graphql";
 import CountryRepository from "../repositories/country.repository";
 
 export default class CountryService {
@@ -18,6 +18,14 @@ export default class CountryService {
             throw new Error("No country found");
         }
         return country;
+    }
+
+    async findCountryByContinent(data: QueryFindCountriesByContinentArgs["data"]) {
+        const countries = await this.db.find({ where: { continent: data.continent}});
+        if (!countries) {
+            throw new Error("No countries found");
+        }
+        return countries;
     }
 
     async create(country: MutationCreateCountryArgs["data"]) {

@@ -19,6 +19,10 @@ export default class CountryEntity {
     @Field()
     @Column()
     emoji!: string;
+
+    @Field()
+    @Column()
+    continent!: string;
 }
 
 @InputType()
@@ -31,10 +35,19 @@ export class CreateCountryInput {
 
     @Field()
     emoji!: string;
+
+    @Field()
+    continent!: string;
 }
 
 @InputType()
 export class FindCountryInput {
     @Field()
     code!: string;
+}
+
+@InputType()
+export class FindCountriesInput {
+    @Field()
+    continent!: string;
 }

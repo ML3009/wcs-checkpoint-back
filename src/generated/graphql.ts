@@ -19,6 +19,7 @@ export type Scalars = {
 export type Country = {
   __typename?: 'Country';
   code: Scalars['String']['output'];
+  continent: Scalars['String']['output'];
   emoji: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
@@ -26,8 +27,13 @@ export type Country = {
 
 export type CreateCountryInput = {
   code: Scalars['String']['input'];
+  continent: Scalars['String']['input'];
   emoji: Scalars['String']['input'];
   name: Scalars['String']['input'];
+};
+
+export type FindCountriesInput = {
+  continent: Scalars['String']['input'];
 };
 
 export type FindCountryInput = {
@@ -47,7 +53,13 @@ export type MutationCreateCountryArgs = {
 export type Query = {
   __typename?: 'Query';
   countries: Array<Country>;
+  findCountriesByContinent: Array<Country>;
   findCountryByCode: Country;
+};
+
+
+export type QueryFindCountriesByContinentArgs = {
+  data: FindCountriesInput;
 };
 
 
@@ -129,6 +141,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Country: ResolverTypeWrapper<Country>;
   CreateCountryInput: CreateCountryInput;
+  FindCountriesInput: FindCountriesInput;
   FindCountryInput: FindCountryInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -141,6 +154,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Country: Country;
   CreateCountryInput: CreateCountryInput;
+  FindCountriesInput: FindCountriesInput;
   FindCountryInput: FindCountryInput;
   ID: Scalars['ID']['output'];
   Mutation: {};
@@ -150,6 +164,7 @@ export type ResolversParentTypes = {
 
 export type CountryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Country'] = ResolversParentTypes['Country']> = {
   code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  continent?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   emoji?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -162,6 +177,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   countries?: Resolver<Array<ResolversTypes['Country']>, ParentType, ContextType>;
+  findCountriesByContinent?: Resolver<Array<ResolversTypes['Country']>, ParentType, ContextType, RequireFields<QueryFindCountriesByContinentArgs, 'data'>>;
   findCountryByCode?: Resolver<ResolversTypes['Country'], ParentType, ContextType, RequireFields<QueryFindCountryByCodeArgs, 'data'>>;
 };
 
