@@ -24,11 +24,17 @@ export default class CountryEntity {
 @InputType()
 export class CreateCountryInput {
     @Field()
-    code!: string
+    code!: string;
 
     @Field()
-    name!: string
+    name!: string;
 
     @Field()
-    emoji!: string
+    emoji!: string;
+}
+
+@InputType()
+export class FindCountryInput {
+    @Field()
+    code!: string;
 }

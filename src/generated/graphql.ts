@@ -30,6 +30,10 @@ export type CreateCountryInput = {
   name: Scalars['String']['input'];
 };
 
+export type FindCountryInput = {
+  code: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createCountry: Country;
@@ -43,6 +47,12 @@ export type MutationCreateCountryArgs = {
 export type Query = {
   __typename?: 'Query';
   countries: Array<Country>;
+  findCountryByCode: Country;
+};
+
+
+export type QueryFindCountryByCodeArgs = {
+  data: FindCountryInput;
 };
 
 
@@ -119,6 +129,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Country: ResolverTypeWrapper<Country>;
   CreateCountryInput: CreateCountryInput;
+  FindCountryInput: FindCountryInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -130,6 +141,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Country: Country;
   CreateCountryInput: CreateCountryInput;
+  FindCountryInput: FindCountryInput;
   ID: Scalars['ID']['output'];
   Mutation: {};
   Query: {};
@@ -150,6 +162,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   countries?: Resolver<Array<ResolversTypes['Country']>, ParentType, ContextType>;
+  findCountryByCode?: Resolver<ResolversTypes['Country'], ParentType, ContextType, RequireFields<QueryFindCountryByCodeArgs, 'data'>>;
 };
 
 export type Resolvers<ContextType = any> = {
